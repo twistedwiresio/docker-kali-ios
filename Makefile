@@ -16,7 +16,7 @@ run:
 	$(IMAGE_NAME)
 
 shell:
-	docker exec -ti $(CONTAINER_NAME) /bin/bash
+	docker exec -ti $(CONTAINER_NAME) /bin/bash &&  true
 
 clean:
 	docker rm -f $(CONTAINER_NAME)

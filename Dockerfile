@@ -68,6 +68,7 @@ libfuse3-dev bzip2 libbz2-dev libz-dev cmake build-essential git libattr1-dev \
 fuse3 unzip lzma tzdata xz-utils \
 curl git bison flex build-essential unzip \
 fontconfig libxrender1 libxtst6 libxi6 openjdk-17-jdk-headless \
+xfonts-base xserver-xorg-input-all xinit xserver-xorg xserver-xorg-video-all \
     liblzfse-dev \ 
     unrar \
     sqlcipher \
@@ -135,8 +136,7 @@ RUN pip3 install frida-tools \
     lief  
 
 RUN git clone https://github.com/GotoHack/ios-deploy.git /opt/ios-deploy  && \
-    cd /opt/ios-deploy && \
-    make && ln -s ios-deploy /usr/local/bin/ 
+    cd /opt/ios-deploy && make && ln -s /opt/ios-deploy/ios-deploy /usr/local/bin/ 
 
 
 RUN cd /opt \
@@ -187,13 +187,13 @@ RUN jupyter notebook --generate-config && \
     echo "c.NotebookApp.open_browser = False" >> /root/.jupyter/jupyter_notebook_config.py
 
 # Clone cctools-port
-RUN git clone https://github.com/tpoechtrager/cctools-port.git /root/ioscompile/cctools-port
+RUN git clone https://github.com/tpoechtrager/cctools-port.git /opt/ios_toolchain/cctools-port
 
 # Build the iOS cross-compiler toolchain
 RUN     echo "Downloading SDK from GitHub..." && \
         curl -L https://github.com/GrowtopiaJaw/iPhoneOS-SDK/releases/download/v1.0/${SDK_VERSION}.tar.xz -o /tmp/${SDK_VERSION}.tar.xz && \
         echo "Using downloaded SDK tarball for build..." && \
-        cd /root/ioscompile/cctools-port/usage_examples/ios_toolchain && \
+        cd /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain && \
         ./build.sh /tmp/${SDK_VERSION}.tar.xz arm64
 
 # Darling-dmg (requires building from source)
@@ -240,8 +240,8 @@ RUN cp /tmp/checkra1n* /usr/local/bin && chmod 777 /usr/local/bin/checkra1n*
 
 RUN /bin/sh -c "$(curl -fsSL https://static.palera.in/scripts/install.sh)"
 
-RUN curl -L  https://cydia.saurik.com/api/latest/5 -o /tmp/Impactor64.tgz
-RUN mkdir -p /opt/impactor/ cd /opt/impactor && tar -xvf  /tmp/Impactor64.tgz
+#RUN curl -L  https://cydia.saurik.com/api/latest/5 -o /tmp/Impactor64.tgz
+#RUN mkdir -p /opt/impactor/ cd /opt/impactor && tar -xvf  /tmp/Impactor64.tgz
 
 RUN curl -sL http://nah6.com/~itsme/cvs-xdadevtools/iphone/tools/lzssdec.cpp -o /tmp/lzssdec.cpp \
     && g++ -o /usr/local/bin/lzssdec /tmp/lzssdec.cpp \
@@ -264,7 +264,7 @@ RUN curl -L http://www.newosxbook.com/tools/joker.tar -o /tmp/joker.tar \
 
 # Function to install disarm
 RUN curl -L http://newosxbook.com/tools/disarm.tar -o /tmp/disarm.tar \
-    && tar -xvf /tmp/disarm.tar && cd binaries && cp -v disarm.ELF64*  /usr/local/bin \
+    && cd /tmp && tar -xvf /tmp/disarm.tar && cd /tmp/binaries && cp -v disarm.ELF64*  /usr/local/bin \
     && echo "Installed disarm to /usr/local/bin"
 
 # Function to install OTA stuff
@@ -280,10 +280,10 @@ RUN git clone https://gist.github.com/683ec721655f3729f9fad23b052384e3.git /opt/
 
 
 # Download apple developper disk image
-RUN for DVER in 15.7 15.6.1 15.6 15.5 15.4 15.3.1 15.3 15.2 15.1 15.0 14.7.1 14.7 14.6 14.5 14.4 14.3 14.2 14.1; do curl -L https://github.com/mspvirajpatel/Xcode_Developer_Disk_Images/releases/download/$DVER/$DVER.zip -o $DVER.zip && mkdir $DVER && cd $DVER && unzip ../$DVER.zip && rm ../$DVER.zip && cd -; done
+RUN for DVER in 15.7 15.6.1 15.6 15.5 15.4 15.3.1 15.3 15.2 15.1 15.0 14.7.1 14.7 14.6 14.5 14.4 14.3 14.2 14.1; do curl -L https://github.com/mspvirajpatel/Xcode_Developer_Disk_Images/releases/download/$DVER/$DVER.zip -o /tmp/$DVER.zip && mkdir -p ./DDI/$DVER && cd ./DDI/$DVER && unzip /tmp/$DVER.zip && rm /tmp/$DVER.zip && cd -; done
 
-ENV PATH /root/ioscompile/cctools-port/usage_examples/ios_toolchain/target/bin:$PATH
-ENV LD_LIBRARY_PATH /root/ioscompile/cctools-port/usage_examples/ios_toolchain/target/lib:$LD_LIBRARY_PATH
+ENV PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/bin:$PATH
+ENV LD_LIBRARY_PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/lib:$LD_LIBRARY_PATH
 
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
