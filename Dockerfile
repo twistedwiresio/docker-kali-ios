@@ -292,5 +292,5 @@ COPY --from=IPSWBUILDER /bin/ipsw /bin/ipsw
 COPY --from=GHIDRABUILDER /ghidra /ghidra
 
 # Start SSH service, usbfluxd, and Jupyter Notebook on container start
-CMD ["/bin/zsh", "-c", "/usr/sbin/sshd -D & usbfluxd & jupyter notebook --no-browser --port=8888 --ip=0.0.0.0"]
+CMD ["/bin/zsh", "-c", "/usr/sbin/sshd -D & usbmuxd & jupyter notebook --no-browser --port=8888 --ip=0.0.0.0"]
 #CMD ["/bin/zsh", "-c", "/usr/sbin/sshd -D & jupyter notebook --no-browser --port=8888 --ip=0.0.0.0"]
