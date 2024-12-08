@@ -100,7 +100,7 @@ xfonts-base xserver-xorg-input-all xinit xserver-xorg xserver-xorg-video-all \
     automake \
     libplist-dev \
     autotools-dev \
-    libimobiledevice6 \
+    libimobiledevice-1.0-6 \
     usbmuxd \
      avahi-daemon \
     curl \
@@ -109,13 +109,11 @@ xfonts-base xserver-xorg-input-all xinit xserver-xorg xserver-xorg-video-all \
     python3-pip \
     libusb-1.0-0-dev \
     usbmuxd \
-    libimobiledevice6 \
     libimobiledevice-utils \
     libimobiledevice-dev \
     libplist-utils \
     ipython3 \
     python3-notebook \
-    libplist3 \
     build-essential \
     pkg-config \
     fakeroot \
