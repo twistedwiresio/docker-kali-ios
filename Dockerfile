@@ -265,23 +265,23 @@ RUN curl -L http://www.newosxbook.com/tools/joker.tar -o /tmp/joker.tar \
 # Function to install disarm
 RUN curl -L http://newosxbook.com/tools/disarm.tar -o /tmp/disarm.tar \
     && cd /tmp && tar -xvf /tmp/disarm.tar && cd /tmp/binaries && cp -v disarm.ELF64*  /usr/local/bin \
-    && echo "Installed disarm to /usr/local/bin"
-
-# Function to install OTA stuff
-RUN git clone https://gist.github.com/683ec721655f3729f9fad23b052384e3.git /opt/pbzx \
-    && cd /opt/pbzx \
-    && gcc pbzx.c -o pbzx \
-    && cd .. \
-    && git clone https://gist.github.com/be2a4f32a3ba49ad477b34292d728914.git /opt/ota \
-    && cd /opt/ota \
-    && gcc ota.c -o ota \
-    && cp /opt/pbzx/pbzx /opt/ota/ota /usr/local/bin \
-    && echo "Installed OTA stuff to /usr/local/bin"
-
+#    && echo "Installed disarm to /usr/local/bin"
+#
+## Function to install OTA stuff
+#RUN git clone https://gist.github.com/683ec721655f3729f9fad23b052384e3.git /opt/pbzx \
+#    && cd /opt/pbzx \
+#    && gcc pbzx.c -o pbzx \
+#    && cd .. \
+#    && git clone https://gist.github.com/be2a4f32a3ba49ad477b34292d728914.git /opt/ota \
+#    && cd /opt/ota \
+#    && gcc ota.c -o ota \
+#    && cp /opt/pbzx/pbzx /opt/ota/ota /usr/local/bin \
+#    && echo "Installed OTA stuff to /usr/local/bin"
+#
 
 # Download apple developper disk image
-RUN for DVER in 15.7 15.6.1 15.6 15.5 15.4 15.3.1 15.3 15.2 15.1 15.0 14.7.1 14.7 14.6 14.5 14.4 14.3 14.2 14.1; do curl -L https://github.com/mspvirajpatel/Xcode_Developer_Disk_Images/releases/download/$DVER/$DVER.zip -o /tmp/$DVER.zip && mkdir -p ./DDI/$DVER && cd ./DDI/$DVER && unzip /tmp/$DVER.zip && rm /tmp/$DVER.zip && cd -; done
-
+#RUN for DVER in 15.7 15.6.1 15.6 15.5 15.4 15.3.1 15.3 15.2 15.1 15.0 14.7.1 14.7 14.6 14.5 14.4 14.3 14.2 14.1; do curl -L https://github.com/mspvirajpatel/Xcode_Developer_Disk_Images/releases/download/$DVER/$DVER.zip -o /tmp/$DVER.zip && mkdir -p ./DDI/$DVER && cd ./DDI/$DVER && unzip /tmp/$DVER.zip && rm /tmp/$DVER.zip && cd -; done
+#
 ENV PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/bin:$PATH
 ENV LD_LIBRARY_PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/lib:$LD_LIBRARY_PATH
 
