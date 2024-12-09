@@ -176,12 +176,12 @@ EXPOSE 22 5000 8888 13100 13101 13102
 WORKDIR /root
 
 # Configure Jupyter Notebook to run without password or token and allow root access
-RUN jupyter notebook --generate-config && \
-    echo "c.NotebookApp.allow_root = True" >> /root/.jupyter/jupyter_notebook_config.py && \
-    echo "c.NotebookApp.token = ''" >> /root/.jupyter/jupyter_notebook_config.py && \
-    echo "c.NotebookApp.password = ''" >> /root/.jupyter/jupyter_notebook_config.py && \
-    echo "c.NotebookApp.ip = '0.0.0.0'" >> /root/.jupyter/jupyter_notebook_config.py && \
-    echo "c.NotebookApp.open_browser = False" >> /root/.jupyter/jupyter_notebook_config.py
+#RUN jupyter notebook --generate-config && \
+#    echo "c.NotebookApp.allow_root = True" >> /root/.jupyter/jupyter_notebook_config.py && \
+#    echo "c.NotebookApp.token = ''" >> /root/.jupyter/jupyter_notebook_config.py && \
+#    echo "c.NotebookApp.password = ''" >> /root/.jupyter/jupyter_notebook_config.py && \
+#    echo "c.NotebookApp.ip = '0.0.0.0'" >> /root/.jupyter/jupyter_notebook_config.py && \
+#    echo "c.NotebookApp.open_browser = False" >> /root/.jupyter/jupyter_notebook_config.py
 
 # Clone cctools-port
 RUN git clone https://github.com/tpoechtrager/cctools-port.git /opt/ios_toolchain/cctools-port
@@ -291,6 +291,6 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 #COPY --from=IPSWBUILDER /bin/ipsw /bin/ipsw
 COPY --from=GHIDRABUILDER /ghidra /ghidra
 
-# Start SSH service, usbfluxd, and Jupyter Notebook on container start
-CMD ["/bin/zsh", "-c", "/usr/sbin/sshd -D & usbmuxd & jupyter notebook --no-browser --port=8888 --ip=0.0.0.0"]
+# Start SSH service, usbfluxd, and Notebook on container start
+CMD ["/bin/zsh", "-c", "/usr/sbin/sshd -D & usbmuxd ]
 #CMD ["/bin/zsh", "-c", "/usr/sbin/sshd -D & jupyter notebook --no-browser --port=8888 --ip=0.0.0.0"]
