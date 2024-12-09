@@ -282,8 +282,8 @@ RUN curl -L http://newosxbook.com/tools/disarm.tar -o /tmp/disarm.tar \
 # Download apple developper disk image
 #RUN for DVER in 15.7 15.6.1 15.6 15.5 15.4 15.3.1 15.3 15.2 15.1 15.0 14.7.1 14.7 14.6 14.5 14.4 14.3 14.2 14.1; do curl -L https://github.com/mspvirajpatel/Xcode_Developer_Disk_Images/releases/download/$DVER/$DVER.zip -o /tmp/$DVER.zip && mkdir -p ./DDI/$DVER && cd ./DDI/$DVER && unzip /tmp/$DVER.zip && rm /tmp/$DVER.zip && cd -; done
 #
-ENV PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/bin:$PATH
-ENV LD_LIBRARY_PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/lib:$LD_LIBRARY_PATH
+#ENV PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/bin:$PATH
+#ENV LD_LIBRARY_PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain/target/lib:$LD_LIBRARY_PATH
 
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
