@@ -40,14 +40,14 @@ RUN apt-get update && apt-get install -y fontconfig libxrender1 libxtst6 libxi6 
 
 RUN /ghidra/support/buildNatives
 
-FROM golang:1.22 as IPSWBUILDER
-
-RUN git clone https://github.com/blacktop/ipsw /opt/ipsw
-WORKDIR /opt/ipsw
-
-RUN CGO_ENABLED=1 go build \
-    -o /bin/ipsw \
-    ./cmd/ipsw
+#FROM golang:1.22 as IPSWBUILDER
+#
+#RUN git clone https://github.com/blacktop/ipsw /opt/ipsw
+#WORKDIR /opt/ipsw
+#
+#RUN CGO_ENABLED=1 go build \
+#    -o /bin/ipsw \
+#    ./cmd/ipsw
 
 
 FROM kalilinux/kali-rolling as KALI-IOS
@@ -131,7 +131,7 @@ RUN pip3 install frida-tools \
     jupyter \
     capstone \
     objection \
-    lief  
+    lief --break-system-package 
 
 RUN git clone https://github.com/GotoHack/ios-deploy.git /opt/ios-deploy  && \
     cd /opt/ios-deploy && make && ln -s /opt/ios-deploy/ios-deploy /usr/local/bin/ 
@@ -285,8 +285,8 @@ ENV LD_LIBRARY_PATH /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain
 
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-ENV IPSW_IN_DOCKER=1
-COPY --from=IPSWBUILDER /bin/ipsw /bin/ipsw
+#ENV IPSW_IN_DOCKER=1
+#COPY --from=IPSWBUILDER /bin/ipsw /bin/ipsw
 COPY --from=GHIDRABUILDER /ghidra /ghidra
 
 # Start SSH service, usbfluxd, and Jupyter Notebook on container start
