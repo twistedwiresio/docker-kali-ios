@@ -218,8 +218,8 @@ RUN cd /opt/partial-zip && ./autogen.sh --prefix=/usr/ && make && make install
 RUN git clone https://github.com/sbingner/ldid.git /opt/ldid
 RUN cd /opt/ldid && make && make install
 
-RUN git clone https://github.com/GotoHack/ios-deploy.git /opt/ios-deploy  && \
-    cd /opt/ios-deploy && make && ln -s /opt/ios-deploy/ios-deploy /usr/local/bin/ 
+#RUN git clone https://github.com/GotoHack/ios-deploy.git /opt/ios-deploy  && \
+#    cd /opt/ios-deploy && make && ln -s /opt/ios-deploy/ios-deploy /usr/local/bin/ 
  
 # Clone and build usbfluxd
 RUN git clone https://github.com/corellium/usbfluxd.git /opt/usbfluxd
