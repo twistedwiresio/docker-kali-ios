@@ -232,7 +232,7 @@ RUN cd /opt/img4tool && ./autogen.sh --prefix=/usr/ --with-static-libplist=/usr/
 
 RUN libtool --finish /usr/local/lib
 
-RUN python3 -m pip install dyldextractor
+RUN python3 -m pip install dyldextractor --break-system-packages
 
 RUN curl -L https://assets.checkra.in/downloads/linux/cli/x86_64/dac9968939ea6e6bfbdedeb41d7e2579c4711dc2c5083f91dced66ca397dc51d/checkra1n -o /tmp/checkra1n.x86_64 
 RUN curl -L https://assets.checkra.in/downloads/linux/cli/arm64/43019a573ab1c866fe88edb1f2dd5bb38b0caf135533ee0d6e3ed720256b89d0/checkra1n -o /tmp/checkra1n.aarch64
