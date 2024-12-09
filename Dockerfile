@@ -158,7 +158,7 @@ RUN git clone --recursive https://github.com/theos/theos.git $THEOS
 ENV PATH "$THEOS/bin:$PATH"
 
 # Setup SSH
-RUN mkdir /var/run/sshd
+RUN mkdir -p /var/run/sshd
 RUN echo 'root:root' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 # SSH login fix. Otherwise user is kicked off after login
