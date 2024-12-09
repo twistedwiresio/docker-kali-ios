@@ -265,7 +265,7 @@ RUN curl -L http://www.newosxbook.com/tools/joker.tar -o /tmp/joker.tar \
 # Function to install disarm
 RUN curl -L http://newosxbook.com/tools/disarm.tar -o /tmp/disarm.tar \
     && cd /tmp && tar -xvf /tmp/disarm.tar && cd /tmp/binaries && cp -v disarm.ELF64*  /usr/local/bin \
-#    && echo "Installed disarm to /usr/local/bin"
+    && echo "Installed disarm to /usr/local/bin"
 #
 ## Function to install OTA stuff
 #RUN git clone https://gist.github.com/683ec721655f3729f9fad23b052384e3.git /opt/pbzx \
