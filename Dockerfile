@@ -187,12 +187,12 @@ WORKDIR /root
 RUN git clone https://github.com/tpoechtrager/cctools-port.git /opt/ios_toolchain/cctools-port
 
 # Build the iOS cross-compiler toolchain
-RUN     echo "Downloading SDK from GitHub..." && \
-        curl -L https://github.com/GrowtopiaJaw/iPhoneOS-SDK/releases/download/v1.0/${SDK_VERSION}.tar.xz -o /tmp/${SDK_VERSION}.tar.xz && \
-        echo "Using downloaded SDK tarball for build..." && \
-        cd /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain && \
-        ./build.sh /tmp/${SDK_VERSION}.tar.xz arm64
-
+#RUN     echo "Downloading SDK from GitHub..." && \
+#        curl -L https://github.com/GrowtopiaJaw/iPhoneOS-SDK/releases/download/v1.0/${SDK_VERSION}.tar.xz -o /tmp/${SDK_VERSION}.tar.xz && \
+#        echo "Using downloaded SDK tarball for build..." && \
+#        cd /opt/ios_toolchain/cctools-port/usage_examples/ios_toolchain && \
+#        ./build.sh /tmp/${SDK_VERSION}.tar.xz arm64
+#
 # Darling-dmg (requires building from source)
 RUN git clone --recursive https://github.com/darlinghq/darling-dmg.git /opt/darling-dmg && \
     mkdir /opt/darling-dmg/build && \
